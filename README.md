@@ -32,6 +32,7 @@ switch (launchMode)
 {
   case LaunchMode.Never:
     break;
+    
   case LaunchMode.OnNewerVersion:
     launch = (CurrentVersion > LastLaunchedVersion);
     break;
@@ -52,7 +53,7 @@ ProjectPrefs.SetInt(LaunchModeKey, (int) selectedLaunchMode);
 
 ## Usage
 
-Upon any interaction with the utility, if the preference asset file doesn't exist, it will be created. The default file location is `"Assets/MudBun/ProjectPrefs.asset"`. This can be changed by modifying `ProjectPrefs.InstancePath`.
+Upon any interaction with the utility, if the preference asset file doesn't exist, it will be created. The default file location is `"Assets/ProjectPrefs.asset"`. This can be changed by modifying `ProjectPrefs.InstancePath`.
 
 In the `ProjectPrefs` class, several functions are provided for getting a value corresponding to a given key. If the preference asset file doesn't exist or if such key cannot be found, the default values passed in will be returned.
 
