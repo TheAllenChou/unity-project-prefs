@@ -82,7 +82,7 @@ static void AddToSet(string key, string value);
 static void RemoveFromSet(string key, string value);
 ```
 
-Functionally, a string set is equivalent to a collection of bools. Which one to use is up to personal preference. The following two setups are functionally equivalent:
+Functionally, a string set is equivalent to a collection of booleans. Which one to use is up to personal preference. The following two setups are functionally equivalent:
 
 ```cs
 // using a string set
@@ -90,7 +90,7 @@ ProjectPrefs.AddToSet("MySet", "A");
 ProjectPrefs.AddToSet("MySet", "D");
 ProjectPrefs.AddToSet("MySet", "E");
 
-// using bools
+// using booleans
 ProjectPrefs.SetBool("Myset:A", true);
 ProjectPrefs.SetBool("Myset:B", false);
 ProjectPrefs.SetBool("Myset:C", false);
