@@ -1,7 +1,7 @@
 ## Pre-Project Preference Utility for Unity Editor Tools
 by **Ming-Lun "Allen" Chou** / [AllenChou.net](http://AllenChou.net) / [@TheAllenChou](http://twitter.com/TheAllenChou) / [Patreon](https://www.patreon.com/TheAllenChou)
 
-This is a per-project preference utility useful for developing tools for the Unity editor. It's similar to Unity's [`EditorPrefs`](https://docs.unity3d.com/ScriptReference/EditorPrefs.html), except that it stores key-value record pairs as an asset in the current project rather than modifying the machine registry like `EditorPrefs` does.
+This is a per-project preference utility useful for developing tools for the Unity editor. It's similar to Unity's [`EditorPrefs`](https://docs.unity3d.com/ScriptReference/EditorPrefs.html), except that it stores key-value record pairs as an asset in the current project rather than modifying the machine registry like `EditorPrefs` does. This utility is for the editor only and should live in an `Editor` folder.
 
 It also provides a minimalistic editor UI to view and modify the asset through Unity's inspector panel. Supported record types include: booleans, ints, floats, strings, and string sets (unique strings joined by semicolons).
 
