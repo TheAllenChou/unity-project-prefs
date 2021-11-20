@@ -1,4 +1,15 @@
-﻿using System;
+﻿/******************************************************************************/
+/*
+  unity-editor-prefs
+  https://github.com/TheAllenChou/unity-project-prefs
+
+  by Ming-Lun "Allen" Chou
+     http://AllenChou.net
+     http://twitter.com/TheAllenChou
+*/
+/******************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,6 +21,7 @@ namespace LongBunnyLabs
 {
   public class ProjectPrefs : ScriptableObject
   {
+    // modify this to change asset path
     private static readonly string InstancePath = "Assets/ProjectPrefs.asset";
 
     [Serializable]
