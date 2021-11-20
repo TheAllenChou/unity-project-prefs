@@ -49,7 +49,6 @@ LaunchMode selectedLaunchMode = (LaunchModeEnum) EditorGUILayout.EnumPopup(curre
 ProjectPrefs.SetInt(LaunchModeKey, (int) selectedLaunchMode);
 ```
 
-----
 
 ## Usage
 
