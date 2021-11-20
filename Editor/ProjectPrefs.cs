@@ -54,9 +54,6 @@ namespace LongBunnyLabs
     [SerializeField] private List<Record> m_records = new List<Record>();
     public List<Record> Records => m_records;
 
-    [SerializeField] private int m_revision = -1;
-    public int Revision => m_revision;
-
     private static ProjectPrefs Instance
     {
       get
@@ -66,12 +63,10 @@ namespace LongBunnyLabs
         if (instance == null)
         {
           instance = CreateInstance<ProjectPrefs>();
-          instance.m_revision = MudBun.Revision;
           AssetDatabase.CreateAsset(instance, InstancePath);
           AssetDatabase.Refresh();
 
           instance = AssetDatabase.LoadAssetAtPath<ProjectPrefs>(InstancePath);
-          Assert.Unequal(instance, null);
         }
 
         return instance;
@@ -154,13 +149,8 @@ namespace LongBunnyLabs
       if (!GetRecord(key, out Record record))
         return defaultValue;
 
-      Assert.Equal(record.Type, Record.TypeEnum.Bool);
-
       if (!bool.TryParse(record.Value, out bool result))
-      {
-        Debug.LogWarning($"MudBun ProjectPrefs: Cannot parse string \"{record.Value}\" into bool for project preference \"{record.Key}\".");
         return defaultValue;
-      }
 
       return result;
     }
@@ -175,13 +165,8 @@ namespace LongBunnyLabs
       if (!GetRecord(key, out Record record))
         return defaultValue;
 
-      Assert.Equal(record.Type, Record.TypeEnum.Int);
-
       if (!int.TryParse(record.Value, out int result))
-      {
-        Debug.LogWarning($"MudBun ProjectPrefs: Cannot parse string \"{record.Value}\" into int for project preference \"{record.Key}\".");
         return defaultValue;
-      }
 
       return result;
     }
@@ -196,13 +181,8 @@ namespace LongBunnyLabs
       if (!GetRecord(key, out Record record))
         return defaultValue;
 
-      Assert.Equal(record.Type, Record.TypeEnum.Float);
-
       if (!float.TryParse(record.Value, out float result))
-      {
-        Debug.LogWarning($"MudBun ProjectPrefs: Cannot parse string \"{record.Value}\" into float for project preference \"{record.Key}\".");
         return defaultValue;
-      }
 
       return result;
     }
@@ -217,8 +197,6 @@ namespace LongBunnyLabs
       if (!GetRecord(key, out Record record))
         return defaultValue;
 
-      Assert.Equal(record.Type, Record.TypeEnum.String);
-
       return record.Value;
     }
 
@@ -231,8 +209,6 @@ namespace LongBunnyLabs
     {
       if (!GetRecord(key, out Record record))
         return defaultValue;
-
-      Assert.Equal(record.Type, Record.TypeEnum.Set);
 
       return record.Value.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
     }
@@ -254,8 +230,6 @@ namespace LongBunnyLabs
         return;
       }
 
-      Assert.Equal(record.Type, Record.TypeEnum.Set);
-
       record.Value = AddToSetString(record.Value, value);
     }
 
@@ -263,8 +237,6 @@ namespace LongBunnyLabs
     {
       if (!GetRecord(key, out Record record))
         return;
-
-      Assert.Equal(record.Type, Record.TypeEnum.Set);
 
       record.Value = RemoveFromSetString(record.Value, value);
     }
