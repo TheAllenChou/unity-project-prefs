@@ -243,7 +243,7 @@ namespace LongBunnyLabs
   }
 
   [CustomEditor(typeof(ProjectPrefs))]
-  public class ProjectPrefsEditor : MudEditorBase
+  public class ProjectPrefsEditor : Editor
   {
     private static readonly int TypeWidth = 80;
     private static readonly int SmallButtonWidth = 25;
