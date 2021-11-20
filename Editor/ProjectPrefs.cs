@@ -225,6 +225,15 @@ namespace LongBunnyLabs
       return record.Value.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
     }
 
+    public static bool SetContains(string key, string value)
+    {
+      var set = GetSet(key, null);
+      if (set == null)
+        return false;
+
+      return set.Contains(value);
+    }
+
     public static void AddToSet(string key, string value)
     {
       if (!GetRecord(key, out Record record))
