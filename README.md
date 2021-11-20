@@ -3,7 +3,7 @@ by **Ming-Lun "Allen" Chou** / [AllenChou.net](http://AllenChou.net) / [@TheAlle
 
 This is a per-project preference utility useful for developing tools for the Unity editor. It's similar to Unity's [`EditorPrefs`](https://docs.unity3d.com/ScriptReference/EditorPrefs.html), except that it stores key-value record pairs as an asset in the current project rather than modifying the machine registry like `EditorPrefs` does. This utility is for the editor only and should live in an `Editor` folder.
 
-A minimalistic editor UI is provided to view and modify the asset through Unity's inspector panel. Supported record types include: booleans, ints, floats, strings, and string sets (unique strings joined by semicolons).
+A minimalistic editor UI is provided for viewing and modifying the asset through Unity's inspector panel. Supported record types include: booleans, ints, floats, strings, and string sets (unique strings joined by semicolons).
 
 ![turbulent-rainbow-cubes](/img/project-prefs.png)
 
@@ -57,28 +57,28 @@ Upon any interaction with the utility, if the preference asset file doesn't exis
 In the `ProjectPrefs` class, several functions are provided for getting a value corresponding to a given key. If the preference asset file doesn't exist or if such key cannot be found, the default values passed in will be returned.
 
 ```cs
-static bool GetBool(string key, bool defaultValue);
-static int GetInt(string key, int defaultValue);
-static float GetFloat(string key, float defaultValue);
-static string GetString(string key, int defaultValue);
-static string[] GetSet(string key, int defaultValue);
+bool GetBool(string key, bool defaultValue);
+int GetInt(string key, int defaultValue);
+float GetFloat(string key, float defaultValue);
+string GetString(string key, int defaultValue);
+string[] GetSet(string key, int defaultValue);
 ```
 
 There are also functions for setting the value for a given key.
 
 ```cs
-static void SetBool(string key, bool value);
-static void SetInt(string key, int value);
-static void SetFloat(string key, float value);
-static void SetString(string key, string value);
+void SetBool(string key, bool value);
+void SetInt(string key, int value);
+void SetFloat(string key, float value);
+void SetString(string key, string value);
 ```
 
 String sets are a bit special. A string set is a single string consisted of a set of unique strings joined by semicolons. This can be useful for representing a series of flags. There are a couple functions for string set queries and set operations.
 
 ```cs
-static bool SetContains(string key, string value);
-static void AddToSet(string key, string value);
-static void RemoveFromSet(string key, string value);
+bool SetContains(string key, string value);
+void AddToSet(string key, string value);
+void RemoveFromSet(string key, string value);
 ```
 
 Functionally, a string set is equivalent to a collection of booleans. Which one to use is up to personal preference. The following two setups are functionally equivalent:
