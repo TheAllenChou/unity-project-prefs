@@ -1,0 +1,15 @@
+{
+  "name": "com.longbunnylabs.dependencyinjection",
+  "version": "1.0.0",
+  "displayName": "Dependency Injection",
+  "description": "Dependency injection utility for Unity.",
+  "unity": "2019.4",
+  "author": {
+    "name": "Long Bunny Labs",
+    "email": "minglun.chou@gmail.com",
+    "url": "https://TheAllenChou.github.com"
+  },
+  "keywords": [
+    "Dependency Injection"
+  ]
+}

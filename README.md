@@ -1,2 +1,2 @@
-# unity-project-prefs
-Preference utility for editor tools.
+## Dependency Injection Utility for Unity
+by **Ming-Lun "Allen" Chou** / [AllenChou.net](http://AllenChou.net) / [@TheAllenChou](http://twitter.com/TheAllenChou) / [Patreon](https://www.patreon.com/TheAllenChou)
