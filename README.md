@@ -12,7 +12,7 @@ As an example, your tool might need a start screen that contains a check box for
 ```cs
 using namespace LongBunnyLabs;
 
-enum LaunchModeKeyEnum
+enum LaunchMode
 {
   Never, 
   OnNewerVersion, 
