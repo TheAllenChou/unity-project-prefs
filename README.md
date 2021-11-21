@@ -3,7 +3,7 @@ by **Ming-Lun "Allen" Chou** / [AllenChou.net](http://AllenChou.net) / [@TheAlle
 
 This is a per-project preference utility useful for developing tools for the Unity editor. It's similar to Unity's [`EditorPrefs`](https://docs.unity3d.com/ScriptReference/EditorPrefs.html), except that it stores key-value record pairs as a [scriptable object](https://docs.unity3d.com/ScriptReference/ScriptableObject.html) asset in the current project rather than modifying the machine registry like `EditorPrefs` does. This utility is for the editor only and should live in an [`Editor`](https://docs.unity3d.com/Manual/SpecialFolders.html) folder.
 
-A minimalistic editor UI is provided for viewing and modifying the asset through Unity's inspector panel. Supported record types include: booleans, ints, floats, strings, and string sets (unique strings joined by semicolons).
+A minimalistic editor UI is provided for viewing and modifying the asset through Unity's inspector panel (the default scriptable object UI is extended to provide utilities for reordering, sorting, and record type enforcement). Supported record types include: booleans, ints, floats, strings, and string sets (unique strings joined by semicolons).
 
 ![turbulent-rainbow-cubes](/img/project-prefs.png)
 
