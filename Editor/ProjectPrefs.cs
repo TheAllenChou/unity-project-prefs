@@ -248,6 +248,43 @@ namespace LongBunnyLabs
     private static readonly int TypeWidth = 80;
     private static readonly int SmallButtonWidth = 25;
 
+    private static readonly float SaveDelay = 2.0f;
+    private float m_lastDirtyTime = -1.0f;
+
+    private void MarkDirty()
+    {
+      EditorUtility.SetDirty(serializedObject.targetObject);
+      m_lastDirtyTime = Time.realtimeSinceStartup;
+    }
+
+    private void Save()
+    {
+      AssetDatabase.SaveAssets();
+      m_lastDirtyTime = -1.0f;
+    }
+
+    private void TrySave()
+    {
+      if (m_lastDirtyTime < 0.0f)
+        return;
+
+      if (Time.realtimeSinceStartup - m_lastDirtyTime < SaveDelay)
+        return;
+
+      Save();
+    }
+
+    private void OnEnable()
+    {
+      EditorApplication.update += TrySave;
+    }
+
+    private void OnDisable()
+    {
+      EditorApplication.update -= TrySave;
+      Save();
+    }
+
     public override void OnInspectorGUI()
     {
       serializedObject.Update();
@@ -335,6 +372,11 @@ namespace LongBunnyLabs
         records.Remove(recordToDelete);
 
       EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Sort"))
+        {
+          records.Sort((a, b) => a.Key.CompareTo(b.Key));
+          records.ForEach(x => x.Sort());
+        }
         if (GUILayout.Button("+", GUILayout.MinWidth(SmallButtonWidth), GUILayout.MaxWidth(SmallButtonWidth)))
         {
           string newRecordKey = "NewRecord";
@@ -342,22 +384,13 @@ namespace LongBunnyLabs
             newRecordKey += "+";
           records.Add(new ProjectPrefs.Record() { Key = newRecordKey });
         }
-        if (GUILayout.Button("Sort"))
-        {
-          records.Sort((a, b) => a.Key.CompareTo(b.Key));
-          records.ForEach(x => x.Sort());
-        }
-        if (GUILayout.Button("Save"))
-        {
-          AssetDatabase.SaveAssets();
-        }
       EditorGUILayout.EndHorizontal();
 
       serializedObject.Update();
 
       if (EditorGUI.EndChangeCheck())
       {
-        EditorUtility.SetDirty(prefs);
+        MarkDirty();
       }
     }
   }
