@@ -59,7 +59,7 @@ namespace LongBunnyLabs
       get
       {
         var instance = AssetDatabase.LoadAssetAtPath<ProjectPrefs>(InstancePath);
-        
+
         if (instance == null)
         {
           instance = CreateInstance<ProjectPrefs>();
@@ -117,9 +117,9 @@ namespace LongBunnyLabs
     {
       if (GetRecord(key, out Record existingRecord))
       {
-        if (existingRecord.Type == record.Type 
+        if (existingRecord.Type == record.Type
             && existingRecord.Value.Equals(record.Value))
-            return;
+          return;
 
         existingRecord.Type = record.Type;
         existingRecord.Value = record.Value;
@@ -247,6 +247,7 @@ namespace LongBunnyLabs
   {
     private static readonly int TypeWidth = 80;
     private static readonly int SmallButtonWidth = 25;
+    private static readonly int SortButtonWidth = 80;
 
     private static readonly float SaveDelay = 2.0f;
     private float m_lastDirtyTime = -1.0f;
@@ -304,11 +305,11 @@ namespace LongBunnyLabs
       {
         EditorGUILayout.BeginHorizontal();
           record.Key = EditorGUILayout.TextField(record.Key);
-          if (GUILayout.Button("↑", GUILayout.MinWidth(SmallButtonWidth), GUILayout.MaxWidth(SmallButtonWidth)))
+          if (GUILayout.Button("↑", GUILayout.Width(SmallButtonWidth)))
             recordToMoveUp = record;
-          if (GUILayout.Button("↓", GUILayout.MinWidth(SmallButtonWidth), GUILayout.MaxWidth(SmallButtonWidth)))
+          if (GUILayout.Button("↓", GUILayout.Width(SmallButtonWidth)))
             recordToMoveDown = record;
-          if (GUILayout.Button("-", GUILayout.MinWidth(SmallButtonWidth), GUILayout.MaxWidth(SmallButtonWidth)))
+          if (GUILayout.Button("-", GUILayout.Width(SmallButtonWidth)))
             recordToDelete = record;
         EditorGUILayout.EndHorizontal();
 
@@ -317,28 +318,28 @@ namespace LongBunnyLabs
             record.Type = (ProjectPrefs.Record.TypeEnum) Convert.ToInt32(EditorGUILayout.EnumPopup(record.Type, GUILayout.MinWidth(TypeWidth), GUILayout.MaxWidth(TypeWidth)));
             switch (record.Type)
             {
-            case ProjectPrefs.Record.TypeEnum.Bool:
-              bool boolValue;
-              if (!bool.TryParse(record.Value, out boolValue))
-                boolValue = false;
-              record.Value = EditorGUILayout.Toggle(boolValue).ToString();
-              break;
-            case ProjectPrefs.Record.TypeEnum.Int:
-              int intValue;
-              if (!int.TryParse(record.Value, out intValue))
-                intValue = 0;
-              record.Value = EditorGUILayout.IntField(intValue).ToString();
-              break;
-            case ProjectPrefs.Record.TypeEnum.Float:
-              float floatValue;
-              if (!float.TryParse(record.Value, out floatValue))
-                floatValue = 0.0f;
-              record.Value = EditorGUILayout.FloatField(floatValue).ToString();
-              break;
-            case ProjectPrefs.Record.TypeEnum.Set:
-            case ProjectPrefs.Record.TypeEnum.String:
-              record.Value = EditorGUILayout.TextField(record.Value);
-              break;
+              case ProjectPrefs.Record.TypeEnum.Bool:
+                bool boolValue;
+                if (!bool.TryParse(record.Value, out boolValue))
+                  boolValue = false;
+                record.Value = EditorGUILayout.Toggle(boolValue).ToString();
+                break;
+              case ProjectPrefs.Record.TypeEnum.Int:
+                int intValue;
+                if (!int.TryParse(record.Value, out intValue))
+                  intValue = 0;
+                record.Value = EditorGUILayout.IntField(intValue).ToString();
+                break;
+              case ProjectPrefs.Record.TypeEnum.Float:
+                float floatValue;
+                if (!float.TryParse(record.Value, out floatValue))
+                  floatValue = 0.0f;
+                record.Value = EditorGUILayout.FloatField(floatValue).ToString();
+                break;
+              case ProjectPrefs.Record.TypeEnum.Set:
+              case ProjectPrefs.Record.TypeEnum.String:
+                record.Value = EditorGUILayout.TextField(record.Value);
+                break;
             }
           EditorGUILayout.EndHorizontal();
         EditorGUILayout.EndHorizontal();
@@ -372,12 +373,13 @@ namespace LongBunnyLabs
         records.Remove(recordToDelete);
 
       EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Sort"))
+        GUILayout.FlexibleSpace();
+        if (GUILayout.Button("Sort", GUILayout.Width(SortButtonWidth)))
         {
           records.Sort((a, b) => a.Key.CompareTo(b.Key));
           records.ForEach(x => x.Sort());
         }
-        if (GUILayout.Button("+", GUILayout.MinWidth(SmallButtonWidth), GUILayout.MaxWidth(SmallButtonWidth)))
+        if (GUILayout.Button("+", GUILayout.Width(SmallButtonWidth)))
         {
           string newRecordKey = "NewRecord";
           while (records.Any(x => x.Key.Equals(newRecordKey)))
